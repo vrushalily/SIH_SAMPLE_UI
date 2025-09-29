@@ -133,7 +133,6 @@
     Download Sample Document
   </div>
 </div>
-
 <script>
 // Show download button only on verification page
 const downloadBtn = document.getElementById('downloadBtn');
@@ -153,16 +152,6 @@ toggleDownloadButton();
 // Toggle when switching pages
 const backToLogin = document.getElementById('backToLogin');
 backToLogin.addEventListener('click', toggleDownloadButton);
-
-// Toggle after login
-const loginForm = document.getElementById('loginForm');
-loginForm.addEventListener('submit', e => {
-  e.preventDefault();
-  // your existing validation code here
-  verificationSection.style.display = 'block';
-  document.getElementById('login-section').style.display = 'none';
-  toggleDownloadButton();
-});
 </script>
 
 
