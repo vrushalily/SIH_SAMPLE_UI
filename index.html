@@ -120,19 +120,45 @@
 <body>
 <!-- ===== Floating Download Button (Verification Page Only) ===== -->
 <div id="downloadBtn" style="position:fixed; top:20px; right:20px; z-index:9999; text-align:center; display:none;">
-  <a href="https://github.com/user-attachments/assets/6cdb671a-def9-4041-a2ec-b7485792cf33" 
-     download="Sample_Degree.jpg"
-     style="display:inline-block; background:#ff4b2b; color:#fff; 
-            padding:18px 22px; border-radius:50%; 
-            font-size:24px; text-decoration:none; 
-            box-shadow:0 4px 12px rgba(0,0,0,0.4); 
-            font-weight:bold; transition:transform 0.2s;">
-    ⬇
-  </a>
-  <div style="margin-top:8px; font-size:14px; color:#333; font-family:sans-serif; font-weight:600;">
-    Download Sample Document
-  </div>
+  <button id="downloadFileBtn"
+          style="background:#216fe9; color:#fff; padding:14px 26px; 
+                 border:none; border-radius:28px; font-size:18px; 
+                 font-weight:bold; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.3); transition:transform 0.2s;">
+    ⬇ Download Sample Document
+  </button>
 </div>
+
+<script>
+const downloadBtn = document.getElementById('downloadBtn');
+const downloadFileBtn = document.getElementById('downloadFileBtn');
+const verificationSection = document.getElementById('verification-section');
+
+// Show button only on verification page
+function toggleDownloadButton() {
+  downloadBtn.style.display = (verificationSection.style.display === 'block') ? 'block' : 'none';
+}
+
+// Hook into your existing page switching
+const backToLogin = document.getElementById('backToLogin');
+backToLogin.addEventListener('click', () => { downloadBtn.style.display = 'none'; });
+
+// Add download functionality
+downloadFileBtn.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.href = "https://github.com/user-attachments/assets/6cdb671a-def9-4041-a2ec-b7485792cf33"; // raw image URL
+  link.download = "Sample_Degree.jpg";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+
+// Make sure it appears after login
+const loginForm = document.getElementById('loginForm');
+loginForm.addEventListener('submit', () => {
+  // only show if verification section is visible
+  setTimeout(toggleDownloadButton, 50); // small delay ensures the page has switched
+});
+</script>
 
 
 <!-- ===== LOGIN SECTION ===== -->
