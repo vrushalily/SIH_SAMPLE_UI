@@ -133,26 +133,6 @@
     Download Sample Document
   </div>
 </div>
-<script>
-// Show download button only on verification page
-const downloadBtn = document.getElementById('downloadBtn');
-const verificationSection = document.getElementById('verification-section');
-
-function toggleDownloadButton() {
-  if (verificationSection.style.display === 'block') {
-    downloadBtn.style.display = 'block';
-  } else {
-    downloadBtn.style.display = 'none';
-  }
-}
-
-// Initial check
-toggleDownloadButton();
-
-// Toggle when switching pages
-const backToLogin = document.getElementById('backToLogin');
-backToLogin.addEventListener('click', toggleDownloadButton);
-</script>
 
 
 <!-- ===== LOGIN SECTION ===== -->
@@ -263,9 +243,12 @@ loginForm.addEventListener('submit',e=>{
   else if(idInput.value.trim().length<6){idError.textContent='University ID must be at least 6 characters.';idError.style.display='block';valid=false;}
   if(!passInput.value.trim()){passwordError.textContent='Password is required.';passwordError.style.display='block';valid=false;}
   else if(passInput.value.trim().length<8){passwordError.textContent='Password must be at least 8 characters.';passwordError.style.display='block';valid=false;}
-  if(valid){loginSection.style.display='none';verificationSection.style.display='block';}
+  if(valid){loginSection.style.display='none';verificationSection.style.display='block';
+  downloadBtn.style.display = 'block'; } // show button when verification page appears
+
 });
-backToLogin.addEventListener('click',()=>{verificationSection.style.display='none';loginSection.style.display='flex';loginForm.reset();clearFile();});
+backToLogin.addEventListener('click',()=>{verificationSection.style.display='none';downloadBtn.style.display = 'none'; // hide button when going back
+loginSection.style.display='flex';loginForm.reset();clearFile();});
 
 /* upload logic */
 const fileInput=document.getElementById('fileInput');
